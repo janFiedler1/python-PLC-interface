@@ -1,0 +1,19 @@
+# ninja log v6
+496	688	7538306247305296	test_autogen/mocs_compilation.cpp	29e0847a87025e39
+496	688	7538306247305296	test_autogen/timestamp	29e0847a87025e39
+73	1008	7541754009564727	A:/StoredData/test/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs	143100e1e27df2bb
+496	688	7538306247305296	A:/StoredData/test/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/test_autogen/timestamp	29e0847a87025e39
+875	3823	7536934764424182	CMakeFiles/test.dir/test_autogen/mocs_compilation.cpp.obj	2b88431788f6f922
+496	688	7538306247305296	A:/StoredData/test/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/test_autogen/mocs_compilation.cpp	29e0847a87025e39
+879	3916	7536934764472511	CMakeFiles/test.dir/main.cpp.obj	eb0ae16859ba9e57
+689	2873	7538306249244589	CMakeFiles/test.dir/mainwindow.cpp.obj	b672323f5676dbac
+2873	3074	7538306271083476	test.exe	2b552db6fede479c
+521	3246	7541754042347600	build.ninja	2d97deb632a0f98
+1008	4264	7541754042347600	build.ninja	2d97deb632a0f98
+22	920	7541754043844962	A:/StoredData/test/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/CMakeFiles/cmake.verify_globs	143100e1e27df2bb
+944	1147	7541754053063980	test_autogen/timestamp	29e0847a87025e39
+944	1147	7541754053063980	test_autogen/mocs_compilation.cpp	29e0847a87025e39
+944	1147	7541754053063980	A:/StoredData/test/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/test_autogen/timestamp	29e0847a87025e39
+944	1147	7541754053063980	A:/StoredData/test/build/Desktop_Qt_6_8_0_MinGW_64_bit-Debug/test_autogen/mocs_compilation.cpp	29e0847a87025e39
+1148	3580	7541754055094871	CMakeFiles/test.dir/mainwindow.cpp.obj	b672323f5676dbac
+3580	4161	7541754079415111	test.exe	2b552db6fede479c
