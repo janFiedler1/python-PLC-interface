@@ -10,7 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from app import Ui_MainWindow 
-from functions import functions
+import functions
 
 if __name__ == "__main__":
     import sys
@@ -18,5 +18,13 @@ if __name__ == "__main__":
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
+
+    ## Connect the buttons ##############################
+
+    ui.pushButton.clicked.connect(functions.button_clicked)
+
+
+    #####################################################
+
     MainWindow.show()
     sys.exit(app.exec_())
