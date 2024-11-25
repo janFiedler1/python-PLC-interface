@@ -22,6 +22,7 @@ if __name__ == "__main__":
     ## Connect the buttons ##############################
 
     ui.pushButton.clicked.connect(functions.button_clicked)
+    ui.pushButton_2.clicked.connect(functions.send_message)
 
 
     #####################################################
