@@ -19,10 +19,15 @@ if __name__ == "__main__":
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
 
-    ## Connect the buttons ##############################
+    controller = functions.Controller()
 
-    ui.pushButton.clicked.connect(functions.button_clicked)
-    ui.pushButton_2.clicked.connect(functions.send_message)
+    ## Connect the buttons ##############################
+    # user_input = ui.text_input.text()
+    
+    # ui.enter_button.clicked.connect(controller.send_message)
+    ui.enter_button.clicked.connect(lambda: controller.send_message(int(ui.text_input_1.text())))
+    ui.start_button.clicked.connect(lambda: controller.turn_light(True))
+    ui.stop_button.clicked.connect(lambda: controller.turn_light(False))
 
 
     #####################################################

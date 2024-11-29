@@ -11,16 +11,15 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QGridLayout>
-#include <QtWidgets/QLCDNumber>
-#include <QtWidgets/QLabel>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QSlider>
-#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -31,18 +30,16 @@ public:
     QWidget *centralwidget;
     QGridLayout *gridLayout_2;
     QTabWidget *tabWidget;
-    QWidget *tab_3;
+    QWidget *controls_tab;
     QGridLayout *gridLayout;
-    QProgressBar *progressBar;
-    QLabel *label_2;
-    QLabel *label;
-    QLCDNumber *lcdNumber;
-    QPushButton *pushButton_2;
-    QSpacerItem *verticalSpacer;
-    QPushButton *pushButton;
-    QSlider *horizontalSlider;
-    QSpacerItem *horizontalSpacer;
-    QWidget *tab_4;
+    QHBoxLayout *horizontalLayout;
+    QVBoxLayout *verticalLayout_2;
+    QLineEdit *text_input_1;
+    QPushButton *enter_button;
+    QPushButton *start_button;
+    QPushButton *stop_button;
+    QGraphicsView *graphics_view;
+    QWidget *settings_tab;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -50,6 +47,8 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
         MainWindow->resize(898, 542);
+        MainWindow->setTabShape(QTabWidget::TabShape::Rounded);
+        MainWindow->setDockOptions(QMainWindow::DockOption::AllowTabbedDocks|QMainWindow::DockOption::AnimatedDocks);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         gridLayout_2 = new QGridLayout(centralwidget);
@@ -61,65 +60,49 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(tabWidget->sizePolicy().hasHeightForWidth());
         tabWidget->setSizePolicy(sizePolicy);
-        tab_3 = new QWidget();
-        tab_3->setObjectName("tab_3");
-        gridLayout = new QGridLayout(tab_3);
+        controls_tab = new QWidget();
+        controls_tab->setObjectName("controls_tab");
+        gridLayout = new QGridLayout(controls_tab);
         gridLayout->setObjectName("gridLayout");
-        progressBar = new QProgressBar(tab_3);
-        progressBar->setObjectName("progressBar");
-        progressBar->setValue(24);
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName("horizontalLayout");
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setObjectName("verticalLayout_2");
+        text_input_1 = new QLineEdit(controls_tab);
+        text_input_1->setObjectName("text_input_1");
 
-        gridLayout->addWidget(progressBar, 0, 4, 1, 1);
+        verticalLayout_2->addWidget(text_input_1);
 
-        label_2 = new QLabel(tab_3);
-        label_2->setObjectName("label_2");
+        enter_button = new QPushButton(controls_tab);
+        enter_button->setObjectName("enter_button");
 
-        gridLayout->addWidget(label_2, 3, 3, 1, 1);
+        verticalLayout_2->addWidget(enter_button);
 
-        label = new QLabel(tab_3);
-        label->setObjectName("label");
-        label->setWordWrap(true);
+        start_button = new QPushButton(controls_tab);
+        start_button->setObjectName("start_button");
 
-        gridLayout->addWidget(label, 1, 4, 1, 1);
+        verticalLayout_2->addWidget(start_button);
 
-        lcdNumber = new QLCDNumber(tab_3);
-        lcdNumber->setObjectName("lcdNumber");
+        stop_button = new QPushButton(controls_tab);
+        stop_button->setObjectName("stop_button");
 
-        gridLayout->addWidget(lcdNumber, 3, 2, 1, 1);
+        verticalLayout_2->addWidget(stop_button);
 
-        pushButton_2 = new QPushButton(tab_3);
-        pushButton_2->setObjectName("pushButton_2");
 
-        gridLayout->addWidget(pushButton_2, 1, 1, 1, 3);
+        horizontalLayout->addLayout(verticalLayout_2);
 
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
+        graphics_view = new QGraphicsView(controls_tab);
+        graphics_view->setObjectName("graphics_view");
 
-        gridLayout->addItem(verticalSpacer, 2, 4, 2, 1);
+        horizontalLayout->addWidget(graphics_view);
 
-        pushButton = new QPushButton(tab_3);
-        pushButton->setObjectName("pushButton");
 
-        gridLayout->addWidget(pushButton, 0, 1, 1, 3);
+        gridLayout->addLayout(horizontalLayout, 0, 1, 1, 1);
 
-        horizontalSlider = new QSlider(tab_3);
-        horizontalSlider->setObjectName("horizontalSlider");
-        horizontalSlider->setMinimum(1);
-        horizontalSlider->setMaximum(8);
-        horizontalSlider->setValue(4);
-        horizontalSlider->setSliderPosition(4);
-        horizontalSlider->setTracking(true);
-        horizontalSlider->setOrientation(Qt::Orientation::Horizontal);
-
-        gridLayout->addWidget(horizontalSlider, 2, 1, 1, 3);
-
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
-
-        gridLayout->addItem(horizontalSpacer, 0, 5, 2, 1);
-
-        tabWidget->addTab(tab_3, QString());
-        tab_4 = new QWidget();
-        tab_4->setObjectName("tab_4");
-        tabWidget->addTab(tab_4, QString());
+        tabWidget->addTab(controls_tab, QString());
+        settings_tab = new QWidget();
+        settings_tab->setObjectName("settings_tab");
+        tabWidget->addTab(settings_tab, QString());
 
         gridLayout_2->addWidget(tabWidget, 0, 0, 1, 1);
 
@@ -139,12 +122,11 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        label_2->setText(QCoreApplication::translate("MainWindow", "Cups", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "The coffee will be ready in __ minutes/seconds", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("MainWindow", "Cancel Brew", nullptr));
-        pushButton->setText(QCoreApplication::translate("MainWindow", "Brew Coffee", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab_3), QCoreApplication::translate("MainWindow", "Coffee Controls", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab_4), QCoreApplication::translate("MainWindow", "Settings", nullptr));
+        enter_button->setText(QCoreApplication::translate("MainWindow", "Enter", nullptr));
+        start_button->setText(QCoreApplication::translate("MainWindow", "Start", nullptr));
+        stop_button->setText(QCoreApplication::translate("MainWindow", "Stop", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(controls_tab), QCoreApplication::translate("MainWindow", "Controls", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(settings_tab), QCoreApplication::translate("MainWindow", "Settings", nullptr));
     } // retranslateUi
 
 };
