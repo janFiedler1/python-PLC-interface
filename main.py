@@ -11,6 +11,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from app import Ui_MainWindow 
 import functions
+import database
+import datetime
 
 if __name__ == "__main__":
     import sys
@@ -20,14 +22,16 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
 
     controller = functions.Controller()
+    database_connection = database.Database("localhost", "root", "", "plc_data_1")
 
     ## Connect the buttons ##############################
     # user_input = ui.text_input.text()
     
     # ui.enter_button.clicked.connect(controller.send_message)
     ui.enter_button.clicked.connect(lambda: controller.send_message(int(ui.text_input_1.text())))
+    ui.enter_button.clicked.connect(lambda: database_connection.insert_data(int(ui.text_input_1.text()),datetime.datetime.now()))
     ui.start_button.clicked.connect(lambda: controller.turn_light(True))
-    ui.stop_button.clicked.connect(lambda: controller.turn_light(False))
+    ui.stop_button.clicked.connect(lambda:  controller.turn_light(False))
 
 
     #####################################################
