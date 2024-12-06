@@ -18,15 +18,16 @@ class Database:
         #     print(f"Error connecting to MariaDB database: {e}")
 
     def connect_to_mariadb(self, host, user, password, database):
-        try:
-            self.conn = mariadb.connect(
-                host=host,
-                user=user,
-                password=password,
-                database=database
-            )
-        except mariadb.Error as e:
-            print(f"Error connecting to MariaDB database: {e}")
+        # try:
+        self.conn = mariadb.connect(
+            host=host,
+            user=user,
+            password=password,
+            database=database
+        )
+        # except mariadb.Error as e:
+        #     print(f"Error connecting to MariaDB database: {e}")
+            
 
 
     def insert_data(self, value, datetime_value):
