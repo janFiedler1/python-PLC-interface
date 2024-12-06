@@ -1,6 +1,7 @@
 import datetime
 import json
 from pyads import Connection, PLCTYPE_UINT
+from PyQt5 import QtWidgets
 
 class Controller:
     def __init__(self, ui, db_connection, ip_addr='192.168.56.1.1.1', port=851):
@@ -32,10 +33,16 @@ class Controller:
     def connect_to_db(self, db, params):
         try:
             db.connect_to_mariadb(params[0], params[1], params[2], params[3])
+        except:
+            w1 = QtWidgets.QLabel("Error connecting to database")
+            w1.show()
+        else:
             self.ui.db_connected_label.setText("Connected")
             self.db_connected = True
-        except:
-            pass
+            
+            
+
+        
 
     def update_graph(self):
         if(self.db_connected):
@@ -44,7 +51,6 @@ class Controller:
 
     def update_graph_2(self):
         if(self.db_connected):
-            print(self.plc_connection.read_by_name(self.sine))
             self.plc_data_1.append(self.plc_connection.read_by_name(self.sine))
             self.plc_data_1 = self.plc_data_1[-10:]
             self.ui.plot_widget_2.plotItem.clear()

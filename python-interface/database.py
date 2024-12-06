@@ -26,8 +26,6 @@ class Database:
                 database=database
             )
         except mariadb.Error as e:
-            w1 = QtWidgets.QLabel("Error connecting to database")
-            w1.show()
             print(f"Error connecting to MariaDB database: {e}")
 
 
