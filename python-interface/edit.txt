@@ -1,0 +1,5 @@
+
+MainWindow.setTabShape(QtWidgets.QTabWidget.tabShape.Rounded)
+        MainWindow.setDockOptions(QtWidgets.QMainWindow.dockOptions.AllowTabbedDocks | QtWidgets.QMainWindow.dockOptions.AnimatedDocks)
+
+self.db_connected_label.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)

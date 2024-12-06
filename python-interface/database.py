@@ -1,19 +1,21 @@
 import mariadb
 import time
+from PyQt5 import QtWidgets
 
 
 class Database:
 
     def __init__(self, host, user, password, database):
-        try:
-            self.conn = mariadb.connect(
-                host=host,
-                user=user,
-                password=password,
-                database=database
-            )
-        except mariadb.Error as e:
-            print(f"Error connecting to MariaDB database: {e}")
+        pass
+        # try:
+        #     self.conn = mariadb.connect(
+        #         host=host,
+        #         user=user,
+        #         password=password,
+        #         database=database
+        #     )
+        # except mariadb.Error as e:
+        #     print(f"Error connecting to MariaDB database: {e}")
 
     def connect_to_mariadb(self, host, user, password, database):
         try:
@@ -24,6 +26,8 @@ class Database:
                 database=database
             )
         except mariadb.Error as e:
+            w1 = QtWidgets.QLabel("Error connecting to database")
+            w1.show()
             print(f"Error connecting to MariaDB database: {e}")
 
 
@@ -37,6 +41,30 @@ class Database:
             print(f"Error inserting data: {e}")
         finally:
             cursor.close()
+    
+    def get_data_in_time_range(self, start_date, end_date):
+        cursor = self.conn.cursor()
+        query = "select * from data_2 where time between ? and ?"
+        try:
+            cursor.execute(query, (start_date, end_date))
+            self.conn.commit()
+        except mariadb.Error as e:
+            print(f"Error inserting data: {e}")
+        finally:
+            cursor.close()
+
+    def get_data(self):
+        cursor = self.conn.cursor()
+        query = "select value from data_2"
+        try:
+            cursor.execute(query)
+            result = cursor.fetchall()
+            return result
+        except mariadb.Error as e:
+            print(f"Error getting data: {e}")
+        finally:
+            cursor.close()
+
 
     def main(self):
         # Replace with your MariaDB credentials

@@ -38,6 +38,17 @@ class Database:
         finally:
             cursor.close()
 
+    def get_data_in_time_range(self, table, start_date, end_date):
+        cursor = self.conn.cursor()
+        query = "select * from data_2 where time between ? and ?"
+        try:
+            cursor.execute(query, (start_date, end_date))
+            self.conn.commit()
+        except mariadb.Error as e:
+            print(f"Error inserting data: {e}")
+        finally:
+            cursor.close()
+
     def main(self):
         # Replace with your MariaDB credentials
         host = "your_host"

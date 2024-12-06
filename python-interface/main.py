@@ -11,10 +11,12 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import datetime
 
-import functions
+import controller
 import database
 from app import Ui_MainWindow 
 import ui_editor;
+import math
+import random
 
 if __name__ == "__main__":
     import sys
@@ -28,9 +30,11 @@ if __name__ == "__main__":
     MainWindow.setWindowTitle("ControlX GUI")
 
     
-
-    controller = functions.Controller()
     database_connection = database.Database("localhost", "plc_login", "test123", "plc_data_1")
+    controller = controller.Controller(ui, database_connection)
+    
+
+    ui.db_connect_button.clicked.connect(lambda: controller.connect_to_db(database_connection, [ui.db_host_input.text(), ui.db_login_input.text(), ui.db_password_input.text(), ui.db_db_input.text()]))
 
     ## Connect the buttons ##############################
     # user_input = ui.text_input.text()
@@ -41,8 +45,22 @@ if __name__ == "__main__":
     ui.start_button.clicked.connect(lambda: controller.turn_light(True))
     ui.stop_button.clicked.connect(lambda:  controller.turn_light(False))
     #####################################################
-    ui.plot_widget_1.plot([1,2,3,4,5], [30,35,30,35,30], pen='r')
+    # ui.plot_widget_1.plot([1,2,3,4,5], [random.randint(0,30),random.randint(0,30),random.randint(0,30),random.randint(0,30),random.randint(0,30)], pen='r')
     ######################################################
+
+    # print(database_connection.get_data_in_time_range("2024-12-04 00:00:00", "2024-12-05 00:00:00"))
+    ui.stop_button.clicked.connect(lambda:  print(database_connection.get_data()))
+
+
+
+    ######################################################
+    timer = QtCore.QTimer()
+    timer.setInterval(1000)  # 1000 milliseconds = 1 second
+    timer.timeout.connect(lambda: controller.update_graph())
+    # timer.timeout.connect(lambda: print(database_connection.get_data()))
+    timer.start()
+    ######################################################
+
 
 
     MainWindow.show()
