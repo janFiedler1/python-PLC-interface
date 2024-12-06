@@ -19,6 +19,8 @@ def edit_ui(window):
     window.plot_widget_2.setObjectName("plot_widget_2")
     window.gridLayout.removeWidget(window.empty_widget_1)
     window.gridLayout.addWidget(window.plot_widget_2, 0, 2, 1, 1)
+
+    window.plot_widget_2.plotItem.setYRange(-1.3,1.3)
     # self.widget_2 = QtWidgets.QWidget(self.controls_tab)
     # self.widget_2.setMinimumSize(QtCore.QSize(200, 200))
     # self.widget_2.setBaseSize(QtCore.QSize(30, 30))

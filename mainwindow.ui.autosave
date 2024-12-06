@@ -97,6 +97,9 @@
              <property name="text">
               <string>Enter</string>
              </property>
+             <property name="flat">
+              <bool>false</bool>
+             </property>
             </widget>
            </item>
            <item>

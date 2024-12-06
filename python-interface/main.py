@@ -59,6 +59,13 @@ if __name__ == "__main__":
     timer.timeout.connect(lambda: controller.update_graph())
     # timer.timeout.connect(lambda: print(database_connection.get_data()))
     timer.start()
+
+
+    timer2 = QtCore.QTimer()
+    timer2.setInterval(500)  # 1000 milliseconds = 1 second
+    timer2.timeout.connect(lambda: controller.update_graph_2())
+    # timer.timeout.connect(lambda: print(database_connection.get_data()))
+    timer2.start()
     ######################################################
 
 
