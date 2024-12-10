@@ -17,6 +17,14 @@ from app import Ui_MainWindow
 import ui_editor;
 import math
 import random
+import allen_bradley_controller
+
+def foo(controller, abcontroller, ui):
+    controller.update_graph_2()
+    # abcontroller.display_value('MB_4000')
+    ui.lcdNumber.display(abcontroller.get_value('MB_4000'))
+
+
 
 if __name__ == "__main__":
     import sys
@@ -26,7 +34,7 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     ui_editor.edit_ui(ui)
 
-    MainWindow.setWindowIcon(QtGui.QIcon('A://StoredData/test/python-interface/controlx-logo.png'))
+    MainWindow.setWindowIcon(QtGui.QIcon('controlx-logo.png'))
     MainWindow.setWindowTitle("ControlX GUI")
 
     
@@ -51,7 +59,18 @@ if __name__ == "__main__":
     # print(database_connection.get_data_in_time_range("2024-12-04 00:00:00", "2024-12-05 00:00:00"))
     ui.stop_button.clicked.connect(lambda:  print(database_connection.get_data()))
 
+    ######################################################
+    #Allen Bradley Connection
+    ABController = allen_bradley_controller.ABController('170.16.3.36')
+    f = open("output.txt", "w")
+    f.write(ABController.get_tags())
+    f.close()
+    ABController.do_this()
+    # print(ABController.get_program_tags("AG"))
+    # print(ABController.get_value_by_tag("Program:AG.PwrProf"))
 
+    # ABController.display_value('MB_4000')
+    ######################################################
 
     ######################################################
     timer = QtCore.QTimer()
@@ -63,12 +82,15 @@ if __name__ == "__main__":
 
     timer2 = QtCore.QTimer()
     timer2.setInterval(500)  # 1000 milliseconds = 1 second
-    timer2.timeout.connect(lambda: controller.update_graph_2())
+    timer2.timeout.connect(lambda: foo(controller, ABController, ui))
     # timer.timeout.connect(lambda: print(database_connection.get_data()))
     timer2.start()
     ######################################################
 
 
+    
+
 
     MainWindow.show()
     sys.exit(app.exec_())
+

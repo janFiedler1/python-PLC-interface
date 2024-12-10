@@ -1,0 +1,5 @@
+PyQt5
+pyads
+mariadb
+pyqtgraph
+pycomm3
