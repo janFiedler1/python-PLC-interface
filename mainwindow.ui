@@ -20,8 +20,8 @@
    <set>QMainWindow::DockOption::AllowTabbedDocks|QMainWindow::DockOption::AnimatedDocks</set>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -30,32 +30,32 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="controls_tab">
        <attribute name="title">
         <string>Controls</string>
        </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="1" column="0">
          <widget class="QGroupBox" name="graph_box">
           <property name="title">
-           <string>GroupBox</string>
+           <string>Graphs</string>
           </property>
           <layout class="QGridLayout" name="gridLayout">
-           <item row="0" column="2">
-            <widget class="QWidget" name="empty_widget_2" native="true"/>
-           </item>
            <item row="0" column="1">
             <widget class="QWidget" name="empty_widget_1" native="true"/>
            </item>
            <item row="1" column="1">
             <widget class="QWidget" name="empty_widget_3" native="true"/>
            </item>
+           <item row="0" column="2">
+            <widget class="QWidget" name="empty_widget_2" native="true"/>
+           </item>
           </layout>
          </widget>
         </item>
-        <item>
+        <item row="1" column="2">
          <widget class="QGroupBox" name="controls_box">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -63,31 +63,24 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="minimumSize">
+           <size>
+            <width>300</width>
+            <height>0</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
-            <width>200</width>
+            <width>500</width>
             <height>16777215</height>
            </size>
           </property>
           <property name="title">
            <string>Controls</string>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_5">
-           <property name="spacing">
-            <number>0</number>
-           </property>
-           <item>
-            <widget class="QLineEdit" name="text_input_1">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="enter_button">
+          <layout class="QGridLayout" name="gridLayout_3">
+           <item row="0" column="0">
+            <widget class="QPushButton" name="live_data_button">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="Ignored">
                <horstretch>0</horstretch>
@@ -95,12 +88,12 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>Enter</string>
+              <string>Live Data</string>
              </property>
             </widget>
            </item>
-           <item>
-            <widget class="QPushButton" name="start_button">
+           <item row="1" column="1">
+            <widget class="QPushButton" name="alarm_history_button">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="Ignored">
                <horstretch>0</horstretch>
@@ -108,12 +101,12 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>Start</string>
+              <string>Alarm History</string>
              </property>
             </widget>
            </item>
-           <item>
-            <widget class="QPushButton" name="stop_button">
+           <item row="0" column="1">
+            <widget class="QPushButton" name="historical_data_button">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="Ignored">
                <horstretch>0</horstretch>
@@ -121,7 +114,33 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>Stop</string>
+              <string>Historical Data</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QPushButton" name="data_settings_button">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Ignored">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Alarms/Graphs</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0" colspan="2">
+            <widget class="QPushButton" name="login_button">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Ignored">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Login</string>
              </property>
             </widget>
            </item>
@@ -237,6 +256,9 @@
            </item>
            <item>
             <widget class="QGroupBox" name="groupBox_4">
+             <property name="styleSheet">
+              <string notr="true">background-color: red;</string>
+             </property>
              <property name="title">
               <string/>
              </property>
@@ -378,6 +400,9 @@
            </item>
            <item>
             <widget class="QGroupBox" name="db_connection_status_box">
+             <property name="styleSheet">
+              <string notr="true">background-color: red;</string>
+             </property>
              <property name="title">
               <string/>
              </property>
