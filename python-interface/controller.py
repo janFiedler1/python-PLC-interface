@@ -4,6 +4,7 @@ from pyads import Connection, PLCTYPE_UINT
 from PyQt5 import QtWidgets
 
 import database
+from graph import Graph
 
 class Controller:
     def __init__(self, ui):
@@ -12,12 +13,20 @@ class Controller:
         self.light = "MAIN.light"
         self.counter = "MAIN.counter"
         self.sine = "MAIN.sine"
+        self.triangle = "MAIN.triangle"
+        self.sawtooth = "MAIN.sawtooth"
+        self.tags = [self.counter, self.sine, self.triangle, self.sawtooth, "MAIN.null1", "MAIN.null2"]
         self.db_connected = False
         self.plc_data_1 = [0]*30
         # print(self.plc_connection.read_state())
         # print(self.plc_connection.read_by_name(self.light))
 
         self.db_connection = database.Database("localhost", "plc_login", "test123", "plc_data_1")
+        self.graphs = []
+        for i in range(6):
+            new_graph = Graph("graph_"+str(i), self.tags[i], 30)
+            self.graphs.append(new_graph)
+            self.ui.gridLayout.addWidget(new_graph.get_plotwidget(),i//3, i%3, 1, 1)
 
     def turn_light(self, value):
         self.plc_connection.write_by_name(self.light, value)
@@ -67,16 +76,34 @@ class Controller:
     def get_data(self):
         return self.db_connection.get_data()
     
+    def get_value(self, tag):
+        return self.plc_connection.read_by_name(tag)
+    
     def update(self):
         if(self.db_connected):
-            self.update_graph()
-            self.update_graph_2()
+            pass
+            # self.graphs[0].append(self.plc_connection.read_by_name(self.sine))
+            # self.graphs[0] = self.graphs[0][-30:]
+            # self.ui.plot_widget_2.plotItem.clear()
+            # self.ui.plot_widget_2.plot(self.plc_data_1)
+            self.graphs[0].add_value_and_update(self.get_value(self.graphs[0].tag))
+            # self.update_graph_1()
+            # self.update_graph_2()
+            for graph in self.graphs:
+                graph.add_value_and_update(self.get_value(graph.tag))
+            
 
-    def update_graph(self):
+    def update_graph_1(self):
         self.ui.plot_widget_1.plotItem.clear()
         self.ui.plot_widget_1.plot([row[0] for row in self.db_connection.get_data()[-7:]])
 
     def update_graph_2(self):
+        self.plc_data_1.append(self.plc_connection.read_by_name(self.sine))
+        self.plc_data_1 = self.plc_data_1[-30:]
+        self.ui.plot_widget_2.plotItem.clear()
+        self.ui.plot_widget_2.plot(self.plc_data_1)
+
+    def update_graph(self, graph, values):
         self.plc_data_1.append(self.plc_connection.read_by_name(self.sine))
         self.plc_data_1 = self.plc_data_1[-30:]
         self.ui.plot_widget_2.plotItem.clear()

@@ -12,20 +12,24 @@ import ui_editor;
 import math
 import random
 import os
+import sys
 
 ## Constants
-TIMER_INTERVAL = 100  # time in ms
+TIMER_INTERVAL = 10  # time in ms
 
 if __name__ == "__main__":
-    import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
-    ui_editor.edit_ui(ui)
+    ##ui_editor.edit_ui(ui)
+    ui.gridLayout.removeWidget(ui.empty_widget_1)
+    ui.gridLayout.removeWidget(ui.empty_widget_2)
+    ui.gridLayout.removeWidget(ui.empty_widget_3)
 
     ## Set window icon, title
-    MainWindow.setWindowIcon(QtGui.QIcon(os.getcwd()+'\python-interface\controlx-logo.png'))
+    icon_path = os.getcwd()+'/python-interface/controlx-logo.png'
+    MainWindow.setWindowIcon(QtGui.QIcon(icon_path))
     MainWindow.setWindowTitle("ControlX GUI")
     MainWindow.showMaximized()
 
