@@ -13,6 +13,7 @@ import math
 import random
 import os
 import sys
+from alarms import Ui_Dialog
 
 ## Constants
 TIMER_INTERVAL = 100  # time in ms
@@ -33,6 +34,10 @@ if __name__ == "__main__":
     MainWindow.setWindowTitle("ControlX GUI")
     MainWindow.showMaximized()
 
+    dialog_box = QtWidgets.QDialog()
+    dialog_ui = Ui_Dialog()
+    dialog_ui.setupUi(dialog_box)
+    
     
     ## Create controller
     controller = controller.Controller(ui)
@@ -44,6 +49,7 @@ if __name__ == "__main__":
     #ui.start_button.clicked.connect(lambda: controller.turn_light(True))
     #ui.stop_button.clicked.connect(lambda:  controller.turn_light(False))
     ui.plc_connect_button.clicked.connect(lambda:  controller.connect_plc())
+    ui.data_settings_button.clicked.connect(lambda: dialog_box.show())
     ui.default_plc_radio.toggled.connect(lambda checked: ui.groupBox_5.setEnabled(not checked))
     ## ui.custom_plc_radio.toggled.connect(lambda checked: ui.groupBox_5.setEnabled(not checked))
 
