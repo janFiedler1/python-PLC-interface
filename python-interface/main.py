@@ -15,7 +15,7 @@ import os
 import sys
 
 ## Constants
-TIMER_INTERVAL = 10  # time in ms
+TIMER_INTERVAL = 100  # time in ms
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
@@ -56,3 +56,4 @@ if __name__ == "__main__":
     ## Show main window
     MainWindow.show()
     sys.exit(app.exec_())
+
