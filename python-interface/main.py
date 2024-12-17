@@ -16,7 +16,7 @@ import sys
 from alarms import Ui_Dialog
 
 ## Constants
-TIMER_INTERVAL = 100  # time in ms
+TIMER_INTERVAL = 1000  # time in ms
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
@@ -39,20 +39,14 @@ if __name__ == "__main__":
     dialog_ui.setupUi(dialog_box)
     dialog_box.setWindowTitle("Graph and Alarm Settings")
     
-    
     ## Create controller
     controller = controller.Controller(ui)
     
     ## Connect buttons in UI to controller functions
     ui.db_connect_button.clicked.connect(lambda: controller.connect_to_db([ui.db_host_input.text(), ui.db_login_input.text(), ui.db_password_input.text(), ui.db_db_input.text()]))
-    #ui.enter_button.clicked.connect(lambda: controller.send_message(int(ui.text_input_1.text())))
-    #ui.enter_button.clicked.connect(lambda: controller.insert_data(int(ui.text_input_1.text()),datetime.datetime.now()))
-    #ui.start_button.clicked.connect(lambda: controller.turn_light(True))
-    #ui.stop_button.clicked.connect(lambda:  controller.turn_light(False))
     ui.plc_connect_button.clicked.connect(lambda:  controller.connect_plc())
     ui.data_settings_button.clicked.connect(lambda: dialog_box.show())
     ui.default_plc_radio.toggled.connect(lambda checked: ui.groupBox_5.setEnabled(not checked))
-    ## ui.custom_plc_radio.toggled.connect(lambda checked: ui.groupBox_5.setEnabled(not checked))
 
     ## Create a timer and run a function in controller at every timer interval
     timer = QtCore.QTimer()

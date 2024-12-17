@@ -8,28 +8,18 @@ from graph import Graph
 
 class Controller:
     def __init__(self, ui):
+        self.projectid = 1
         self.ui = ui
         
-        self.light = "MAIN.light"
-        self.counter = "MAIN.counter"
-        self.sine = "MAIN.sine"
-        self.triangle = "MAIN.triangle"
-        self.sawtooth = "MAIN.sawtooth"
-        self.tags = [self.counter, self.sine, self.triangle, self.sawtooth, "MAIN.null1", "MAIN.null2"]
+        self.tags = ["MAIN.counter", "MAIN.sine", "MAIN.triangle", "MAIN.sawtooth", "MAIN.null1", "MAIN.null2"]
         self.db_connected = False
-        self.plc_data_1 = [0]*30
-        # print(self.plc_connection.read_state())
-        # print(self.plc_connection.read_by_name(self.light))
-
         self.db_connection = database.Database("localhost", "plc_login", "test123", "plc_data_1")
+
         self.graphs = []
-        for i in range(6):
+        for i in range(len(self.tags)):
             new_graph = Graph("graph_"+str(i), self.tags[i], 30)
             self.graphs.append(new_graph)
             self.ui.gridLayout.addWidget(new_graph.get_plotwidget(),i//3, i%3, 1, 1)
-
-    def turn_light(self, value):
-        self.plc_connection.write_by_name(self.light, value)
 
     def connect_plc(self, ip_addr='192.168.56.1.1.1', port=851):
         try:
@@ -43,18 +33,7 @@ class Controller:
         else:
             self.ui.plc_connection_status_label.setText("Connected")
             self.db_connected = True
-            self.ui.groupBox_4.setStyleSheet('background-color: green;')
-        
-
-    def send_message(self, value):
-        # self.message = {'text': input_text, 'time': str(datetime.datetime.now())}
-        self.plc_connection.write_by_name(self.counter, value)
-
-    def console_message(self):
-        print("hi")
-
-    def read_message(self):
-        self.plc_connection.read_by_name()
+            self.ui.p.setStyleSheet('background-color: green;')
 
     def connect_to_db(self, params):
         try:
@@ -68,45 +47,30 @@ class Controller:
             self.ui.db_connected_label.setText("Connected")
             self.db_connected = True
             self.ui.db_connection_status_box.setStyleSheet('background-color: green;')
+        
+    def write_value_to_plc(self, tag, value):
+        # self.message = {'text': input_text, 'time': str(datetime.datetime.now())}
+        self.plc_connection.write_by_name(tag, value)
 
-
-    def insert_data(self, value, time):
-        self.db_connection.insert_data(value, time)
-
-    def get_data(self):
-        return self.db_connection.get_data()
-    
-    def get_value(self, tag):
+    def read_value_from_plc(self, tag):
         return self.plc_connection.read_by_name(tag)
+
+    def write_value_to_database(self, project, tag, value):
+        self.db_connection.insert_data(project, tag, value)
+
+    # TODO: create this function in Database.py
+    def read_values_from_database(self, tag, amount=30, start_date="2024-12-17 00:13:23", end_date="2024-12-17 00:13:23"):
+        #return self.db_connection.get_data()
+        pass
     
     def update(self):
         if(self.db_connected):
-            pass
-            # self.graphs[0].append(self.plc_connection.read_by_name(self.sine))
-            # self.graphs[0] = self.graphs[0][-30:]
-            # self.ui.plot_widget_2.plotItem.clear()
-            # self.ui.plot_widget_2.plot(self.plc_data_1)
-            self.graphs[0].add_value_and_update(self.get_value(self.graphs[0].tag))
-            # self.update_graph_1()
-            # self.update_graph_2()
             for graph in self.graphs:
-                graph.add_value_and_update(self.get_value(graph.tag))
+                value = self.read_value_from_plc(graph.tag)
+                graph.add_value_and_update(value)
+                self.db_connection.insert_tag_value(self.projectid, graph.tag, value, str(datetime.datetime.now()))
+            print(self.db_connection.get_data("value", "data", "tag", "MAIN.sawtooth", start="", end=""))
+            print(self.db_connection.get_data("value", "data", "tag", "MAIN.sawtooth", start="2024-12-17 00:13:23", end="2024-12-17 00:13:25"))
             
-
-    def update_graph_1(self):
-        self.ui.plot_widget_1.plotItem.clear()
-        self.ui.plot_widget_1.plot([row[0] for row in self.db_connection.get_data()[-7:]])
-
-    def update_graph_2(self):
-        self.plc_data_1.append(self.plc_connection.read_by_name(self.sine))
-        self.plc_data_1 = self.plc_data_1[-30:]
-        self.ui.plot_widget_2.plotItem.clear()
-        self.ui.plot_widget_2.plot(self.plc_data_1)
-
-    def update_graph(self, graph, values):
-        self.plc_data_1.append(self.plc_connection.read_by_name(self.sine))
-        self.plc_data_1 = self.plc_data_1[-30:]
-        self.ui.plot_widget_2.plotItem.clear()
-        self.ui.plot_widget_2.plot(self.plc_data_1)
         
 

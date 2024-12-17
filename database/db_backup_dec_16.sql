@@ -19,8 +19,18 @@
 CREATE DATABASE IF NOT EXISTS `plc_data_1` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_uca1400_ai_ci */;
 USE `plc_data_1`;
 
--- Dumping structure for table plc_data_1.data
-CREATE TABLE IF NOT EXISTS `data` (
+-- Dumping structure for table plc_data_1.data_1
+CREATE TABLE IF NOT EXISTS `data_1` (
+  `id` int(11) NOT NULL,
+  `value` float DEFAULT NULL,
+  `timestamp` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table plc_data_1.data_2
+CREATE TABLE IF NOT EXISTS `data_2` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `value` int(11) DEFAULT NULL,
   `time` datetime DEFAULT NULL,

@@ -1,6 +1,6 @@
 PyQt5
-PyQt6
 pyads
 mariadb
 pyqtgraph
+pycomm3
 pyinstaller
