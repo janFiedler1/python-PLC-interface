@@ -1731,6 +1731,7 @@ endif()
 # _directory_contents at C:/Qt/6.8.0/mingw_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "A:/StoredData/test/*.ui")
 set(OLD_GLOB
+  "A:/StoredData/test/alarms_graphs.ui"
   "A:/StoredData/test/mainwindow.ui"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")

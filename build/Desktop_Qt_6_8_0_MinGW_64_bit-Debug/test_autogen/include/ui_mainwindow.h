@@ -37,7 +37,6 @@ public:
     QTabWidget *tabWidget;
     QWidget *controls_tab;
     QGridLayout *gridLayout_4;
-    QLabel *label_10;
     QGroupBox *graph_box;
     QGridLayout *gridLayout;
     QWidget *empty_widget_1;
@@ -50,7 +49,6 @@ public:
     QPushButton *historical_data_button;
     QPushButton *data_settings_button;
     QPushButton *login_button;
-    QLabel *label_2;
     QWidget *settings_tab;
     QHBoxLayout *horizontalLayout_2;
     QGroupBox *plc_settings_box;
@@ -95,9 +93,8 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(898, 542);
+        MainWindow->resize(993, 571);
         MainWindow->setTabShape(QTabWidget::TabShape::Rounded);
-        MainWindow->setDockOptions(QMainWindow::DockOption::AllowTabbedDocks|QMainWindow::DockOption::AnimatedDocks);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         gridLayout_2 = new QGridLayout(centralwidget);
@@ -113,17 +110,6 @@ public:
         controls_tab->setObjectName("controls_tab");
         gridLayout_4 = new QGridLayout(controls_tab);
         gridLayout_4->setObjectName("gridLayout_4");
-        label_10 = new QLabel(controls_tab);
-        label_10->setObjectName("label_10");
-        QSizePolicy sizePolicy1(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(label_10->sizePolicy().hasHeightForWidth());
-        label_10->setSizePolicy(sizePolicy1);
-        label_10->setStyleSheet(QString::fromUtf8("background-color: red;"));
-
-        gridLayout_4->addWidget(label_10, 1, 2, 1, 1);
-
         graph_box = new QGroupBox(controls_tab);
         graph_box->setObjectName("graph_box");
         gridLayout = new QGridLayout(graph_box);
@@ -144,67 +130,59 @@ public:
         gridLayout->addWidget(empty_widget_2, 0, 2, 1, 1);
 
 
-        gridLayout_4->addWidget(graph_box, 2, 0, 1, 1);
+        gridLayout_4->addWidget(graph_box, 1, 0, 1, 1);
 
         controls_box = new QGroupBox(controls_tab);
         controls_box->setObjectName("controls_box");
-        QSizePolicy sizePolicy2(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Preferred);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(controls_box->sizePolicy().hasHeightForWidth());
-        controls_box->setSizePolicy(sizePolicy2);
+        QSizePolicy sizePolicy1(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(controls_box->sizePolicy().hasHeightForWidth());
+        controls_box->setSizePolicy(sizePolicy1);
         controls_box->setMinimumSize(QSize(300, 0));
         controls_box->setMaximumSize(QSize(500, 16777215));
         gridLayout_3 = new QGridLayout(controls_box);
         gridLayout_3->setObjectName("gridLayout_3");
         live_data_button = new QPushButton(controls_box);
         live_data_button->setObjectName("live_data_button");
-        QSizePolicy sizePolicy3(QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Ignored);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(live_data_button->sizePolicy().hasHeightForWidth());
-        live_data_button->setSizePolicy(sizePolicy3);
+        QSizePolicy sizePolicy2(QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Ignored);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(live_data_button->sizePolicy().hasHeightForWidth());
+        live_data_button->setSizePolicy(sizePolicy2);
 
         gridLayout_3->addWidget(live_data_button, 0, 0, 1, 1);
 
         alarm_history_button = new QPushButton(controls_box);
         alarm_history_button->setObjectName("alarm_history_button");
-        sizePolicy3.setHeightForWidth(alarm_history_button->sizePolicy().hasHeightForWidth());
-        alarm_history_button->setSizePolicy(sizePolicy3);
+        sizePolicy2.setHeightForWidth(alarm_history_button->sizePolicy().hasHeightForWidth());
+        alarm_history_button->setSizePolicy(sizePolicy2);
 
         gridLayout_3->addWidget(alarm_history_button, 1, 1, 1, 1);
 
         historical_data_button = new QPushButton(controls_box);
         historical_data_button->setObjectName("historical_data_button");
-        sizePolicy3.setHeightForWidth(historical_data_button->sizePolicy().hasHeightForWidth());
-        historical_data_button->setSizePolicy(sizePolicy3);
+        sizePolicy2.setHeightForWidth(historical_data_button->sizePolicy().hasHeightForWidth());
+        historical_data_button->setSizePolicy(sizePolicy2);
 
         gridLayout_3->addWidget(historical_data_button, 0, 1, 1, 1);
 
         data_settings_button = new QPushButton(controls_box);
         data_settings_button->setObjectName("data_settings_button");
-        sizePolicy3.setHeightForWidth(data_settings_button->sizePolicy().hasHeightForWidth());
-        data_settings_button->setSizePolicy(sizePolicy3);
+        sizePolicy2.setHeightForWidth(data_settings_button->sizePolicy().hasHeightForWidth());
+        data_settings_button->setSizePolicy(sizePolicy2);
 
         gridLayout_3->addWidget(data_settings_button, 1, 0, 1, 1);
 
         login_button = new QPushButton(controls_box);
         login_button->setObjectName("login_button");
-        sizePolicy3.setHeightForWidth(login_button->sizePolicy().hasHeightForWidth());
-        login_button->setSizePolicy(sizePolicy3);
+        sizePolicy2.setHeightForWidth(login_button->sizePolicy().hasHeightForWidth());
+        login_button->setSizePolicy(sizePolicy2);
 
         gridLayout_3->addWidget(login_button, 2, 0, 1, 2);
 
 
-        gridLayout_4->addWidget(controls_box, 2, 2, 1, 1);
-
-        label_2 = new QLabel(controls_tab);
-        label_2->setObjectName("label_2");
-        sizePolicy1.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
-        label_2->setSizePolicy(sizePolicy1);
-        label_2->setStyleSheet(QString::fromUtf8("background-color: red;"));
-
-        gridLayout_4->addWidget(label_2, 1, 0, 1, 1);
+        gridLayout_4->addWidget(controls_box, 1, 2, 1, 1);
 
         tabWidget->addTab(controls_tab, QString());
         settings_tab = new QWidget();
@@ -282,7 +260,6 @@ public:
 
         plc_connection_status_label = new QLabel(groupBox_4);
         plc_connection_status_label->setObjectName("plc_connection_status_label");
-        plc_connection_status_label->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
 
         horizontalLayout_4->addWidget(plc_connection_status_label);
 
@@ -371,7 +348,6 @@ public:
 
         db_connected_label = new QLabel(db_connection_status_box);
         db_connected_label->setObjectName("db_connected_label");
-        db_connected_label->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
 
         horizontalLayout_3->addWidget(db_connected_label);
 
@@ -392,7 +368,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
         plc_select_dropdown->setCurrentIndex(0);
         db_select_dropdown->setCurrentIndex(0);
 
@@ -403,7 +379,6 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        label_10->setText(QCoreApplication::translate("MainWindow", "Database: Connected", nullptr));
         graph_box->setTitle(QCoreApplication::translate("MainWindow", "Graphs", nullptr));
         controls_box->setTitle(QCoreApplication::translate("MainWindow", "Controls", nullptr));
         live_data_button->setText(QCoreApplication::translate("MainWindow", "Live Data", nullptr));
@@ -411,7 +386,6 @@ public:
         historical_data_button->setText(QCoreApplication::translate("MainWindow", "Historical Data", nullptr));
         data_settings_button->setText(QCoreApplication::translate("MainWindow", "Alarms/Graphs", nullptr));
         login_button->setText(QCoreApplication::translate("MainWindow", "Login", nullptr));
-        label_2->setText(QCoreApplication::translate("MainWindow", "PLC: Disconnected", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(controls_tab), QCoreApplication::translate("MainWindow", "Controls", nullptr));
         plc_settings_box->setTitle(QCoreApplication::translate("MainWindow", "Connect PLC", nullptr));
         plc_select_dropdown->setItemText(0, QCoreApplication::translate("MainWindow", "Local TwinCat XAE PLC", nullptr));

@@ -3,3 +3,4 @@ PyQt6
 pyads
 mariadb
 pyqtgraph
+pyinstaller

@@ -37,6 +37,7 @@ if __name__ == "__main__":
     dialog_box = QtWidgets.QDialog()
     dialog_ui = Ui_Dialog()
     dialog_ui.setupUi(dialog_box)
+    dialog_box.setWindowTitle("Graph and Alarm Settings")
     
     
     ## Create controller
