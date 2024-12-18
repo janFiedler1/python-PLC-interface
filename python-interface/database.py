@@ -36,61 +36,26 @@ class Database:
             
 
 
-    def get_data(self, target, table, tag, value, start="", end=""):
+    def get_tag_data(self, tag, start="", end=""):
         cursor = self.conn.cursor()
-
-        query = "select * from ? where ? = ?"
+        query = "select value from `data` where `tag` = '"+tag+"'"
         if(start != ""):
-            query = query + "and time between ? and ?"
+            query = query + " and time between \""+start+"\" and \""+end+"\""
         try:
             if(start != ""):
-                cursor.execute(query, (table, tag, value, start, end))
+                cursor.execute(query)
             else:
-                cursor.execute(query, (table, tag, value))
-            result = cursor.fetchall()
+                cursor.execute(query)
+            result = []
+            for row in cursor:
+                result.append(row[0])
             return result
         except mariadb.Error as e:
-            print(f"Error reading data: {query}")
+            print(f"Error reading data:\n {e}\n{query}")
         finally:
             cursor.close()
-    
-    # def get_data_in_time_range(self, start_date, end_date):
-    #     cursor = self.conn.cursor()
-    #     query = "select * from data_2 where time between ? and ?"
-    #     try:
-    #         cursor.execute(query, (start_date, end_date))
-    #         self.conn.commit()
-    #     except mariadb.Error as e:
-    #         print(f"Error inserting data: {e}")
-    #     finally:
-    #         cursor.close()
 
-    # def get_data(self):
-    #     cursor = self.conn.cursor()
-    #     query = "select value from data"
-    #     try:
-    #         cursor.execute(query)
-    #         result = cursor.fetchall()
-    #         return result
-    #     except mariadb.Error as e:
-    #         print(f"Error getting data: {e}")
-    #     finally:
-    #         cursor.close()
-
-
-    # def main(self):
-    #     # Replace with your MariaDB credentials
-    #     host = "your_host"
-    #     user = "your_user"
-    #     password = "your_password"
-    #     database = "your_database"
-
-    #     conn = self.connect_to_mariadb(host, user, password, database)
-    #     if conn is None:
-    #         return
-
-    #     while True:
-    #         current_time = time.strftime("%Y-%m-%d %H:%M:%S")
-    #         value = 1  # Replace with your desired value
-    #         self.insert_data(conn, current_time, value)
-    #         time.sleep(1)
+if __name__ == "__main__":
+    database = Database("localhost", "plc_login", "test123", "plc_data_1")
+    database.connect_to_mariadb("localhost", "plc_login", "test123", "plc_data_1")
+    print(database.get_tag_data("MAIN.sawtooth","2024-12-17 17:53:20","2024-12-17 17:53:22"))

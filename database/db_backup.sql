@@ -22,35 +22,28 @@ USE `plc_data_1`;
 -- Dumping structure for table plc_data_1.data
 CREATE TABLE IF NOT EXISTS `data` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_id` int(11) DEFAULT NULL,
+  `tag` text DEFAULT NULL,
   `value` int(11) DEFAULT NULL,
   `time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
-
--- Data exporting was unselected.
-
--- Dumping structure for table plc_data_1.plc_connections
-CREATE TABLE IF NOT EXISTS `plc_connections` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` text NOT NULL,
-  `host` inet4 NOT NULL,
-  `port` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=261 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 -- Data exporting was unselected.
 
 -- Dumping structure for table plc_data_1.plc_graphs
 CREATE TABLE IF NOT EXISTS `plc_graphs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` int(11) NOT NULL DEFAULT 0 COMMENT 'graph name',
-  `profile` float NOT NULL DEFAULT 0 COMMENT 'these graphs can be saved to a profile, helpful for dividing projects',
-  `tag` int(11) NOT NULL DEFAULT 0 COMMENT 'tag as can be accessed with a read function',
-  `x_range` float NOT NULL DEFAULT 0 COMMENT 'Amount of data values on x axis',
+  `name` text NOT NULL COMMENT 'graph name',
+  `profile_id` int(11) NOT NULL DEFAULT 0 COMMENT 'these graphs can be saved to a profile, helpful for dividing projects',
+  `tag` text NOT NULL COMMENT 'tag as can be accessed with a read function',
+  `x_range` int(11) NOT NULL DEFAULT 0 COMMENT 'Amount of data values on x axis',
   `x_unit` text NOT NULL COMMENT 'unit of measurement',
   `y_max` float NOT NULL DEFAULT 0,
   `y_min` float NOT NULL DEFAULT 0,
   `y_unit` text NOT NULL COMMENT 'unit of measurement',
+  `alarm_greater` set('Greater','Less') NOT NULL,
+  `alarm_threshold` float NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
@@ -60,8 +53,21 @@ CREATE TABLE IF NOT EXISTS `plc_graphs` (
 CREATE TABLE IF NOT EXISTS `plc_tags` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tag_name` text NOT NULL,
-  `connection_id` int(11) NOT NULL DEFAULT 0,
-  `connection_index` int(11) NOT NULL DEFAULT 0,
+  `project_id` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table plc_data_1.projects
+CREATE TABLE IF NOT EXISTS `projects` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` text NOT NULL,
+  `host` inet4 NOT NULL,
+  `port` int(11) NOT NULL,
+  `user` text DEFAULT NULL,
+  `password` text DEFAULT NULL,
+  `database` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 

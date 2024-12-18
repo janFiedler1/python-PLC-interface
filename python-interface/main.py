@@ -34,6 +34,10 @@ if __name__ == "__main__":
     MainWindow.setWindowTitle("ControlX GUI")
     MainWindow.showMaximized()
 
+    ## Edit UI
+    ui.plc_connection_settings.setEnabled(False)
+    ui.db_settings_form.setEnabled(False)
+
     dialog_box = QtWidgets.QDialog()
     dialog_ui = Ui_Dialog()
     dialog_ui.setupUi(dialog_box)
@@ -46,13 +50,17 @@ if __name__ == "__main__":
     ui.db_connect_button.clicked.connect(lambda: controller.connect_to_db([ui.db_host_input.text(), ui.db_login_input.text(), ui.db_password_input.text(), ui.db_db_input.text()]))
     ui.plc_connect_button.clicked.connect(lambda:  controller.connect_plc())
     ui.data_settings_button.clicked.connect(lambda: dialog_box.show())
-    ui.default_plc_radio.toggled.connect(lambda checked: ui.groupBox_5.setEnabled(not checked))
+    ui.default_plc_radio.toggled.connect(lambda checked: ui.plc_connection_settings.setEnabled(not checked))
+    ui.db_connection_default_radio.toggled.connect(lambda checked: ui.db_settings_form.setEnabled(not checked))
+    ui.data_settings_button.clicked.connect(lambda: dialog_box.show())
+    ui.live_data_button.clicked.connect(lambda: controller.set_live_data())
+    ui.historical_data_button.clicked.connect(lambda: controller.set_historic_data())
 
     ## Create a timer and run a function in controller at every timer interval
-    timer = QtCore.QTimer()
-    timer.setInterval(TIMER_INTERVAL)  # 1000 milliseconds = 1 second
-    timer.timeout.connect(lambda: controller.update())
-    timer.start()
+    # timer = QtCore.QTimer()
+    # timer.setInterval(TIMER_INTERVAL)  # 1000 milliseconds = 1 second
+    # timer.timeout.connect(lambda: controller.update())
+    # timer.start()
 
     ## Show main window
     MainWindow.show()
