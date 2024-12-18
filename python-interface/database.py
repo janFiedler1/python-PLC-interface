@@ -40,7 +40,9 @@ class Database:
         cursor = self.conn.cursor()
         query = "select value from `data` where `tag` = '"+tag+"'"
         if(start != ""):
-            query = query + " and time between \""+start+"\" and \""+end+"\""
+            query = query + " and time between \""+start+"\" and \""+end+"\" limit 30"
+        else:
+            query = query+" limit 30"
         try:
             if(start != ""):
                 cursor.execute(query)

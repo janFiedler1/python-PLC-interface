@@ -20,5 +20,13 @@ class Graph:
         self.plot_widget.plotItem.clear()
         self.plot_widget.plot(self.values)
 
+    def update(self, values):
+        self.values = values
+        self.plot_widget.plotItem.clear()
+        self.plot_widget.plot(self.values)
+        
+    def clear(self):
+        self.plot_widget.plotItem.clear()
+
     def get_plotwidget(self):
         return self.plot_widget

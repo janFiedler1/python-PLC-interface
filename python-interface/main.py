@@ -27,6 +27,8 @@ if __name__ == "__main__":
     ui.gridLayout.removeWidget(ui.empty_widget_1)
     ui.gridLayout.removeWidget(ui.empty_widget_2)
     ui.gridLayout.removeWidget(ui.empty_widget_3)
+    ui.dateTimeEdit.setDateTime(datetime.datetime.now())
+    ui.dateTimeEdit_2.setDateTime(datetime.datetime.now())
 
     ## Set window icon, title
     icon_path = os.getcwd()+'/python-interface/controlx-logo.png'
@@ -54,7 +56,8 @@ if __name__ == "__main__":
     ui.db_connection_default_radio.toggled.connect(lambda checked: ui.db_settings_form.setEnabled(not checked))
     ui.data_settings_button.clicked.connect(lambda: dialog_box.show())
     ui.live_data_button.clicked.connect(lambda: controller.set_live_data())
-    ui.historical_data_button.clicked.connect(lambda: controller.set_historic_data())
+    ui.historical_data_button.clicked.connect(lambda: controller.set_historic_data(ui.dateTimeEdit.dateTime().toString("yyyy-MM-dd hh:mm:ss"), ui.dateTimeEdit_2.dateTime().toString("yyyy-MM-dd hh:mm:ss")))
+    # print(ui.dateTimeEdit.dateTime().toString("yyyy-MM-dd hh:mm:ss"))
 
     ## Create a timer and run a function in controller at every timer interval
     # timer = QtCore.QTimer()

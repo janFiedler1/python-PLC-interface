@@ -13,7 +13,8 @@ class Controller:
     def __init__(self, ui):
         self.projectid = 1
         self.ui = ui
-        self.tags = ["MAIN.counter", "MAIN.sine", "MAIN.triangle", "MAIN.sawtooth", "MAIN.null1", "MAIN.null2"]
+        # self.tags = ["MAIN.counter", "MAIN.sine", "MAIN.triangle", "MAIN.sawtooth", "MAIN.null1", "MAIN.null2"]
+        self.tags = ["MAIN.counter", "MAIN.sine", "MAIN.triangle", "MAIN.sawtooth"]
         self.db_connected = False
         self.live_data = False
         self.timer = QtCore.QTimer()
@@ -77,12 +78,19 @@ class Controller:
         self.timer.start()
         self.live_data = True
 
-    def set_historic_data(self):
+    def set_historic_data(self, start, end):
         self.timer.stop()
         self.live_data = False
+        if(self.db_connected):
+            for graph in self.graphs:
+                values = self.db_connection.get_tag_data(graph.tag, start, end)
+                print(f'{graph.name}: {values}')
+                if(len(values) > 0):
+                    graph.update(values)
+                else:
+                    graph.clear()
     
     def update(self):
-        print("hi")
         if(self.db_connected):
             for graph in self.graphs:
                 value = self.read_value_from_plc(graph.tag)
