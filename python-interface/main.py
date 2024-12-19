@@ -24,9 +24,9 @@ if __name__ == "__main__":
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     ##ui_editor.edit_ui(ui)
-    ui.gridLayout.removeWidget(ui.empty_widget_1)
-    ui.gridLayout.removeWidget(ui.empty_widget_2)
-    ui.gridLayout.removeWidget(ui.empty_widget_3)
+    ui.gridLayout_2.removeWidget(ui.empty_widget_1)
+    ui.gridLayout_2.removeWidget(ui.empty_widget_2)
+    ui.gridLayout_2.removeWidget(ui.empty_widget_3)
     ui.dateTimeEdit.setDateTime(datetime.datetime.now())
     ui.dateTimeEdit_2.setDateTime(datetime.datetime.now())
 

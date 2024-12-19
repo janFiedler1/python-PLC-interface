@@ -1,6 +1,7 @@
 #!/bin/bash
 pyuic5 mainwindow.ui -o python-interface/app.py
 pyuic5 alarms_graphs.ui -o python-interface/alarms.py
+pyuic5 settings_dialog.ui -o python-interface/settings.py
 
 
 #sed -i -e 's/abc/XYZ/g' /tmp/file.txt
@@ -14,6 +15,16 @@ pyuic5 alarms_graphs.ui -o python-interface/alarms.py
 # self.buttonBox.setOrientation(QtCore.Qt.Qt::Orientation::Horizontal)
 # self.buttonBox.setStandardButtons(QtCore.Qt.QDialogButtonBox::StandardButton::Cancel|QtCore.Qt.QDialogButtonBox::StandardButton::Ok)
 
-# replace
-# self.scrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOffQtCore.Qt.Qt::ScrollBarPolicy::ScrollBarAlwaysOff)
-# self.scrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+# Scrollbar policy
+# QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOffQtCore.Qt.Qt::ScrollBarPolicy::ScrollBarAlwaysOff
+# QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff
+
+
+
+## Align center 
+# QtCore.Qt.Qt::AlignmentFlag::AlignCenter
+# QtCore.Qt.AlignmentFlag.AlignCenter
+
+## Left to right
+## QtCore.Qt.Qt::LayoutDirection::LeftToRight
+## QtCore.Qt.LayoutDirection.LeftToRight
