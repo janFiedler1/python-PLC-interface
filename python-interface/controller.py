@@ -8,7 +8,7 @@ from PyQt5 import QtWidgets, QtCore, QtGui
 import database
 from graph import Graph
 from alarms import Ui_Dialog
-from ui_mainwindow import Ui_MainWindow
+from main_ui import Ui_MainWindow
 from settings import Ui_Dialog as Settings
 
 ## Constants
@@ -77,11 +77,11 @@ class Controller:
         self.db_connection = database.Database("localhost", "plc_login", "test123", "plc_data_1")
         ## Populate graphs
         self.graphs = []
+        self.ui.gridLayout.removeWidget(self.ui.empty_widget_1)
         for i in range(len(self.tags)):
-            print("hi")
             new_graph = Graph("graph_"+str(i), self.tags[i], 30)
             self.graphs.append(new_graph)
-            self.ui.gridLayout_2.addWidget(new_graph.get_plotwidget(),i//3, i%3, 1, 1)
+            self.ui.gridLayout.addWidget(new_graph.get_plotwidget(),i//3, i%3, 1, 1)
         ##############################################################################################
 
         ## Show main window
@@ -103,6 +103,8 @@ class Controller:
             self.db_connected = True
             self.settings_ui.plc_connection_status_label.setText("Connected")
             self.settings_ui.plc_connection_status_box.setStyleSheet('background-color: green;')
+            self.ui.label_15.setText("PLC: Connected")
+            self.ui.label_15.setStyleSheet('background-color: green;')
 
     def connect_to_db(self, params):
         try:
@@ -116,6 +118,8 @@ class Controller:
             self.db_connected = True
             self.settings_ui.db_connected_label.setText("Connected")
             self.settings_ui.db_connection_status_box.setStyleSheet('background-color: green;')
+            self.ui.label_14.setText("Database: Connected")
+            self.ui.label_14.setStyleSheet('background-color: green;')
         
     def write_value_to_plc(self, tag, value):
         # self.message = {'text': input_text, 'time': str(datetime.datetime.now())}
@@ -135,14 +139,15 @@ class Controller:
     def set_live_data(self):
         self.timer.start()
         self.live_data = True
+        self.ui.label_13.setText("Live Data")
 
     def set_historic_data(self, start, end):
+        self.ui.label_13.setText("Historical Data")
         self.timer.stop()
         self.live_data = False
         if(self.db_connected):
             for graph in self.graphs:
                 values = self.db_connection.get_tag_data(graph.tag, start, end)
-                print(f'{graph.name}: {values}')
                 if(len(values) > 0):
                     graph.update(values)
                 else:
