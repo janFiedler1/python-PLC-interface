@@ -57,7 +57,7 @@ class Controller:
         self.ui.pushButton.clicked.connect(lambda: settings_box.show())
 
         self.settings_ui.db_connect_button.clicked.connect(lambda: self.connect_to_db([self.settings_ui.db_host_input.text(), self.settings_ui.db_login_input.text(), self.settings_ui.db_password_input.text(), self.settings_ui.db_db_input.text()]))
-        self.settings_ui.plc_connect_button.clicked.connect(lambda:  self.connect_plc())
+        self.settings_ui.plc_connect_button.clicked.connect(lambda:  self.connect_plc('192.168.56.1.1.1'))
         self.settings_ui.default_plc_radio.toggled.connect(lambda checked: self.settings_ui.plc_connection_settings.setEnabled(not checked))
         self.settings_ui.db_connection_default_radio.toggled.connect(lambda checked: self.settings_ui.db_settings_form.setEnabled(not checked))
 
